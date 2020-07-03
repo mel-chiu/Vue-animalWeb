@@ -1,29 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    
+      <app-nav/>
+    
+    <router-view/>
+    
+    
+      <app-footer copyright="Designed by Melinda Chiu 2020"/>
+    
+    
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import Navbar from '../src/components/navbar/navbar.vue';
+import Footer from '../src/components/footer/footer.vue';
 
 @Component({
   components: {
-    HelloWorld,
+    'app-nav': Navbar,
+    'app-footer' : Footer
   },
 })
 export default class App extends Vue {}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+body{
+  background-color: orchid;
 }
+#app {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  position: relative;
+  background: rgb(107, 90, 53);
+}
+
 </style>
