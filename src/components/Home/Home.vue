@@ -21,7 +21,7 @@ export default Vue.extend({
     data(){
       return{
         landingpageMessage: 'Feel lonley at home during COVID-19?' as string,
-        welcomeMessage: 'Check out our animals' as string,
+        welcomeMessage: 'Check out our photos' as string,
 
       }
     },

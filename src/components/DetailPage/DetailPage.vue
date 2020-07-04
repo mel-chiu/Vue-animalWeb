@@ -40,7 +40,7 @@ export default Vue.extend({
   },
   
   methods: {
-    findProfile(id: string) {
+    findProfile(id?: string) {
         this.profile = [];
       axios
         .get('https://api.unsplash.com/photos/'+ this.id, {

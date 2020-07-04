@@ -24,7 +24,7 @@
       "esnext",
       "dom",
       "dom.iterable",
-      "scripthost"
+      "scripthost",
     ]
   },
   "include": [
@@ -35,6 +35,11 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "typings"
+  ],
+  "typeRoots": [ 
+    "node_modules/@types", 
+    "VueApp/shared/types"
   ]
 }
