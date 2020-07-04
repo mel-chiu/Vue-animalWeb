@@ -73,12 +73,16 @@ img {
 }
 .btn{
   background-color: rgb(134, 122, 95);
-  border: 2px solid rgb(53, 43, 11);
+  border: 1px solid rgb(53, 43, 11);
   width: 100px;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #eee;
   font-size: 20px;
   padding: 4px;
   margin: 0 3px 20px 3px;
+  cursor: pointer;
+}
+.btn:hover{
+  background-color: rgb(36, 32, 25);
 }
 </style>
