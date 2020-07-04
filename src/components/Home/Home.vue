@@ -7,9 +7,6 @@
         <h1 id="welcomeMessage">{{welcomeMessage}}</h1>
       </div>
       <div>
-        <button>All</button>
-        <button>Cat</button>
-        <button>Dog</button>
         <Showcase/>
       </div>
     </div>
@@ -42,7 +39,7 @@ export default Vue.extend({
   background-size: cover;
   resize: inherit;
   width: 100%;
-  height: 570px;
+  height: 550px;
 }
 #landingMessage{
  color: rgb(114, 110, 91);
@@ -60,5 +57,12 @@ export default Vue.extend({
   color: #eee;
   cursor: s-resize;
   padding: 10px;
+}
+
+@media(max-width: 769px){
+  #landingMessage{
+    font-size: 2em;
+    width: 50%;
+  }
 }
 </style>

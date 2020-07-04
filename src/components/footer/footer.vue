@@ -25,6 +25,7 @@ export default class Footer extends Vue{
     bottom: 0;
     background: rgb(3, 2, 8);
     color: #eee;
+    z-index: 99;
 }
 #copyright>li{
     list-style-type: none;

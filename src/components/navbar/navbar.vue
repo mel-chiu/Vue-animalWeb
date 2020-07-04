@@ -5,8 +5,8 @@
     </router-link>
     <div>
       <ul id="menubars">
-        <li v-show="menushow">
-          <router-link to="/gallery">{{option1}}</router-link>
+         <li v-show="menushow">
+          <router-link to="/">{{option1}}</router-link>
         </li>
         <li v-show="menushow">
           <router-link to="/gallery">{{option2}}</router-link>
@@ -31,9 +31,9 @@ export default Vue.extend({
   name: "Navbar",
   data() {
     return {
-      option1: "Cat" as string,
-      option2: "Dog" as string,
-      option3: "Explore" as string,
+      option1: "Home" as string,
+      option2: "Animals" as string,
+      option3: "Random" as string,
       menushow: false as boolean,
       scrollPosition: 0 as number
     };

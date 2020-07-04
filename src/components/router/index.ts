@@ -20,8 +20,9 @@ export default new Router ({
             component:Gallery
         },
         {
-            path:'/detail',
+            path:'/detail/:id',
             name:'DetailPage',
+            props:true,
             component:DetailPage
         },
         {

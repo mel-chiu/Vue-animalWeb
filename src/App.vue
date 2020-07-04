@@ -31,7 +31,7 @@ body{
   background-color: orchid;
 }
 #app {
-  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-family: 'Cantarell', sans-serif;
   position: relative;
   background: rgb(107, 90, 53);
 }
