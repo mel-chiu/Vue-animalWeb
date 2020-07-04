@@ -31,6 +31,7 @@ import axios from "axios";
 
 
 export default Vue.extend({
+  name:"DetailPage",
   props: ["id"],
   data() {
     return {

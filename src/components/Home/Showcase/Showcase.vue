@@ -7,7 +7,7 @@
     <button type="submit" class="btn" @click.prevent="findPhoto('Cat and Dog')">Both</button>
     <div class="pic-row">
       <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
-        <stack-item v-for="(image, i) in images" :key="i" style="transition: transform 300ms">
+        <stack-item v-for="(image, id) in images" :key="id" style="transition: transform 300ms">
           <router-link :to="{name: 'DetailPage', params: {id: image.id}}">
             <img :src="image.urls.small" :alt="image.alt_description" />
           </router-link>
@@ -69,7 +69,7 @@ export default Vue.extend({
 img {
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 15px;
 }
 .btn{
   background-color: rgb(134, 122, 95);

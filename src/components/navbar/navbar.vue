@@ -33,7 +33,7 @@ export default Vue.extend({
   data() {
     return {
       option1: "Home" as string,
-      option2: "Animals" as string,
+      option2: "Discovery" as string,
       option3: "Random" as string,
       menushow: false as boolean,
       scrollPosition: 0 as number

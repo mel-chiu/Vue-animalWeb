@@ -1,101 +1,106 @@
 <template>
   <div id="RandomPage">
-    
-      <img :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg"/>
-     <div v-if="profile" id="content"> 
+    <div v-if="loading">
+      <Spinner/>
+    </div>
+    <div v-else-if="!loading">
+    <img :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
+    <div v-if="profile" id="content">
       <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
       <p>Popularity: {{profile.likes/100}} %</p>
       <p>{{profile.user.name}}</p>
- 
     </div>
-    <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next">
+    <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-
-
+import Spinner from "../UI/Spinner/Spinner.vue";
 
 export default Vue.extend({
+  name: "RandomPage",
   props: ["id"],
   data() {
     return {
       profile: [] as unknown,
+      loading:false as boolean
     };
   },
-  
+  components:{
+    Spinner
+  },
   methods: {
     findProfile() {
-        this.profile = [];
+      this.profile = [];
       axios
-        .get('https://api.unsplash.com/photos/random/?query=cat-and-dog', {
+        .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
           headers: {
-            Authorization:
-              `Client-ID ${process.env.VUE_APP_MYVUE}`
+            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
           }
         })
         .then(res => {
           this.profile = res.data;
         });
     },
-    nextToggle(){
-        this.profile = [];
+    nextToggle() {
+      this.profile = [];
       axios
-        .get('https://api.unsplash.com/photos/random/?query=cat-and-dog', {
+        .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
           headers: {
-            Authorization:
-              `Client-ID ${process.env.VUE_APP_MYVUE}`
+            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
           }
         })
         .then(res => {
           this.profile = res.data;
         });
     }
-    
   },
-   watch: {
+  watch: {
     $route(to, from) {
       this.findProfile();
     }
   },
+  beforeMount(){
+    this.loading=true;
+  },
 
   mounted() {
+    this.loading=false;
     this.findProfile();
   }
 });
 </script>
 <style scoped>
-#RandomPage{
+#RandomPage {
   color: #eee;
 }
-#profileImg{
-    width: 100%;
-    height: auto;
+#profileImg {
+  width: 100%;
+  height: auto;
 }
-#related-items{
-    cursor: pointer; 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
+#related-items {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 }
-.related-item{
+.related-item {
   width: auto;
   height: 300px;
   overflow: hidden;
   margin: 0 40px;
 }
-#content{
+#content {
   position: relative;
   text-align: right;
   right: 100px;
 }
-#next{
-    position: relative;
-    left: 45%;
-
+#next {
+  position: relative;
+  left: 45%;
 }
-
 </style>
