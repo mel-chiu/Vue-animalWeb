@@ -7,28 +7,25 @@
         <h1 id="welcomeMessage">{{welcomeMessage}}</h1>
       </div>
       <div>
-        <Showcase/>
+        <my-showcase/>
       </div>
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import { Component, Vue } from 'vue-property-decorator';
 import Showcase from '../../components/Showcase/Showcase.vue';
 
-
-export default Vue.extend({
-    name:'homepage',
-    data(){
-      return{
-        landingpageMessage: 'Feel lonley at home during COVID-19?' as string,
-        welcomeMessage: 'Check out our photos' as string,
-
-      }
-    },
-    components:{
-      Showcase
+@Component({
+	components:{
+		'my-showcase': Showcase
+		}
+	})
+export default class Home extends Vue{
+    private landingpageMessage = 'Feel lonley at home during COVID-19?';
+    private welcomeMessage = 'Check out our photos';
+    
     }
-})
+
 </script>
 
 

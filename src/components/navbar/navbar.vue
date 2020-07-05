@@ -26,29 +26,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue } from "vue-property-decorator";
 
-export default Vue.extend({
-  name: "Navbar",
-  data() {
-    return {
-      option1: "Home" as string,
-      option2: "Discovery" as string,
-      option3: "Random" as string,
-      menushow: false as boolean,
-      scrollPosition: 0 as number
-    };
-  },
+@Component
+export default class Navbar extends Vue {
+  private option1 = "Home";
+  private option2 = "Discovery";
+  private option3 = "Randomizer";
+  private menushow = false;
+  private scrollPosition = 0;
 
+  public updateScroll(): void {
+    this.scrollPosition = window.scrollY;
+  }
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
-  },
-  methods: {
-    updateScroll() {
-      this.scrollPosition = window.scrollY;
-    }
   }
-});
+}
 </script>
 
 <style>
@@ -106,7 +100,7 @@ export default Vue.extend({
 #bar3.change3 {
   transform: rotate(45deg) translate(-8px, -7px);
 }
-.option{
+.option {
   color: rgb(146, 114, 114);
   text-decoration: none;
   font-size: 18px;

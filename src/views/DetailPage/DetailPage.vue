@@ -40,14 +40,14 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      profile: [] as unknown,
-      imgSrc:"" as string
+      profile: [] as Array<object>
     };
   },
   
   methods: {
     findProfile(id?: string) {
         this.profile = [];
+        
       axios
         .get('https://api.unsplash.com/photos/'+ this.id, {
           headers: {
@@ -57,15 +57,17 @@ export default Vue.extend({
         })
         .then(res => {
           this.profile = res.data;
+          
         })
         .catch(() => {
           this.profile = [];
+          
         });
     }
     
   },
    watch: {
-    $route(to, from) {
+    $route(to: string, from: string) {
       this.findProfile();
     }
   },
