@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Showcase from '../Home/Showcase/Showcase.vue';
+import Showcase from '../../components/Showcase/Showcase.vue';
 
 
 export default Vue.extend({

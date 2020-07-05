@@ -25,7 +25,6 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-//@ts-ignore
 import { Stack, StackItem } from "vue-stack-grid";
 
 export default Vue.extend({

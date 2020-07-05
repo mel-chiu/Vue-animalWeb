@@ -7,7 +7,7 @@
     <img :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
     <div v-if="profile" id="content">
       <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
-      <p>Popularity: {{profile.likes/100}} %</p>
+      <p>{{profile.likes}} Likes</p>
       <p>{{profile.user.name}}</p>
     </div>
     <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
@@ -18,7 +18,7 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import Spinner from "../UI/Spinner/Spinner.vue";
+import Spinner from "../../components/UI/Spinner/Spinner.vue";
 
 export default Vue.extend({
   name: "RandomPage",
@@ -97,7 +97,7 @@ export default Vue.extend({
 #content {
   position: relative;
   text-align: right;
-  right: 100px;
+  right: 70px;
 }
 #next {
   position: relative;

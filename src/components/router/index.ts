@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../Home/Home.vue';
-import Gallery from '../Gallery/Gallery.vue';
-import DetailPage from '../DetailPage/DetailPage.vue';
-import RandomPage from '../RandomPage/RandomPage.vue';
+import Home from '../../views/Home/Home.vue';
+import Gallery from '../../views/Gallery/Gallery.vue';
+import DetailPage from '../../views/DetailPage/DetailPage.vue';
+import RandomPage from '../../views/RandomPage/RandomPage.vue';
 
 Vue.use(Router);
 

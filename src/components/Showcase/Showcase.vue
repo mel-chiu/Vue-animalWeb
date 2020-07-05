@@ -1,10 +1,11 @@
 <template>
   <div id="Showcase">
     <h1>Especially for you</h1>
-    <p>What do you like?</p>
-    <button type="submit" class="btn" @click.prevent="findPhoto('Cat')">Cat</button>
-    <button type="submit" class="btn" @click.prevent="findPhoto('Dog')">Dog</button>
-    <button type="submit" class="btn" @click.prevent="findPhoto('Cat and Dog')">Both</button>
+    <p>Which one is your favourite ?</p>
+    <button type="submit" class="btn" @click.prevent="findPhoto('cat')">Cat</button>
+    <button type="submit" class="btn" @click.prevent="findPhoto('dog')">Dog</button>
+    <button type="submit" class="btn" @click.prevent="findPhoto('cat-and-dog')">Both</button>
+
     <div class="pic-row">
       <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
         <stack-item v-for="(image, id) in images" :key="id" style="transition: transform 300ms">
@@ -19,15 +20,14 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-//@ts-ignore
- import { Stack, StackItem } from "vue-stack-grid";
+import { Stack, StackItem } from "vue-stack-grid";
 
 export default Vue.extend({
   name: "Showcase",
 
   data() {
     return {
-      images: [] as Array<string>,
+      images: [] as Array<string | number>,
     };
   },
 
@@ -36,11 +36,11 @@ export default Vue.extend({
     StackItem
   },
   methods: {
-    findPhoto(topic: string) {
-      this.images = [];
+    findPhoto(topic?: string){
+       this.images = [];
       axios
         .get(
-          `https://api.unsplash.com/search/photos?query=${topic}&per_page=10&client_id=${process.env.VUE_APP_MYVUE}`
+          `https://api.unsplash.com/search/photos?query=${topic}&per_page=10&page=1&order_by=oldest&client_id=${process.env.VUE_APP_MYVUE}`
         )
         .then(response => {
           this.images = response.data.results;
@@ -48,7 +48,32 @@ export default Vue.extend({
         .catch(() => {
           this.images = [];
         });
+    },
+    showPhoto(){
+      this.images = [];
+      axios
+        .get(
+          `https://api.unsplash.com/search/photos?query=cat&per_page=10&page=1&order_by=oldest&client_id=${process.env.VUE_APP_MYVUE}`
+        )
+        .then(response => {
+          this.images = response.data.results;
+        })
+        .catch(() => {
+          this.images = [];
+        });
+    },
+    showPopular(){
+      const newArr = [] as Array<string>
+      for(let i = 0 as number; i<10; i++){
+        if(this.images[i].likes > 500){
+          newArr.push(this.images[i])
+        } 
+        return newArr;
+      }
     }
+  },
+  beforeMount(){
+    this.showPhoto();
   }
 });
 </script>
