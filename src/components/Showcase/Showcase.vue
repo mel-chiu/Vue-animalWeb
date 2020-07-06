@@ -61,15 +61,6 @@ export default Vue.extend({
         .catch(() => {
           this.images = [];
         });
-    },
-    showPopular(){
-      const newArr = [] as Array<string>
-      for(let i = 0 as number; i<10; i++){
-        if(this.images[i].likes > 500){
-          newArr.push(this.images[i])
-        } 
-        return newArr;
-      }
     }
   },
   beforeMount(){

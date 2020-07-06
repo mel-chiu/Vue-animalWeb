@@ -1,20 +1,11 @@
 <template>
   <nav id="Navbar" v-bind:class="{changeNavColor: scrollPosition > 50}">
-    <router-link to="/home">
-      <img src="../../../public/catIcon.png" alt="icon" id="logo-btn" />
+    <router-link to="/home" class="logo-btn">
+      <img src="../../../public/catIcon.png" alt="icon" class="logo-btn" />
     </router-link>
+    <my-sidenav :class="{open: menushow, closed:!menushow}" />
     <div>
       <ul id="menubars">
-        <li v-show="menushow">
-          <router-link to="/" class="option">{{option1}}</router-link>
-        </li>
-        <li v-show="menushow">
-          <router-link to="/gallery" class="option">{{option2}}</router-link>
-        </li>
-        <li v-show="menushow">
-          <router-link to="/random" class="option">{{option3}}</router-link>
-        </li>
-
         <div id="menuToggle" @click="menushow = !menushow">
           <div class="bar" id="bar1" :class="{change1: menushow}"></div>
           <div class="bar" id="bar2" :class="{change2: menushow}"></div>
@@ -27,8 +18,13 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Sidenav from "./Sidenav/Sidenav.vue";
 
-@Component
+@Component({
+  components: {
+    "my-sidenav": Sidenav
+  }
+})
 export default class Navbar extends Vue {
   private option1 = "Home";
   private option2 = "Discovery";
@@ -57,11 +53,12 @@ export default class Navbar extends Vue {
   left: 0;
   padding: 10px 0;
 }
-#logo-btn {
+.logo-btn {
   width: 50px;
   height: auto;
   margin: 3px;
   margin-left: 10px;
+  z-index: 400;
 }
 #menubars {
   display: flex;
@@ -82,6 +79,8 @@ export default class Navbar extends Vue {
 #menuToggle {
   cursor: pointer;
   display: inline-block;
+  position: relative;
+  z-index: 500;
 }
 .bar {
   width: 40px;
@@ -104,5 +103,13 @@ export default class Navbar extends Vue {
   color: rgb(146, 114, 114);
   text-decoration: none;
   font-size: 18px;
+}
+
+.open {
+  transform: translateY(0);
+}
+.closed {
+  height: 0;
+  transform: translateY(-100%);
 }
 </style>

@@ -7,7 +7,7 @@
       </div>
 
       <div id="search">
-        <input type="text" v-model="topic" placeholder="edit me" @keyup.enter="showPhoto(topic)" />
+        <input type="text" v-model="topic" placeholder="For example: rabbit" @keyup.enter="showPhoto(topic)" />
         <button @click="showPhoto(topic)" id="enter-btn">enter</button>
       </div>
     </div>

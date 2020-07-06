@@ -21,7 +21,7 @@ import Showcase from '../../components/Showcase/Showcase.vue';
 		}
 	})
 export default class Home extends Vue{
-    private landingpageMessage = 'Feel lonley at home during COVID-19?';
+    private landingpageMessage = 'Feel loneley at home during COVID-19?';
     private welcomeMessage = 'Check out our photos';
     
     }
@@ -50,16 +50,44 @@ export default class Home extends Vue{
 }
 #welcomeMessage{
   font-family: 'Barlow Semi Condensed', sans-serif;
-  font-size: 30px;
+  font-size: 200%;
   color: #eee;
   cursor: s-resize;
   padding: 10px;
 }
 
-@media(max-width: 769px){
+
+@media(max-width:630px){
+  #landing{
+    background-position:-270px 20px;
+  }
   #landingMessage{
-    font-size: 2em;
-    width: 50%;
+    font-size: 2.6em;
+    width: 70%;
+    top: 110px;
+    left: 30px;
+  }
+}
+@media(max-width:415px){
+  #landing{
+    background-position:-350px 20px;
+    height: 85vh;
+  }
+}
+@media(max-width:376px){
+  #landing{
+    background-position:-340px 20px;
+    height: 85vh;
+  }
+  #landingMessage{
+    font-size: 2.3em;
+    width: 70%;
+    top: 110px;
+    left: 20px;
+  }
+  #welcomeMessage{
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 160%;
   }
 }
 </style>
