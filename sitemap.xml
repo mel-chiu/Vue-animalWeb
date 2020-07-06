@@ -1,1 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://mel-chiu.github.io/Vue-animalWeb/#</loc></url><url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/gallery</loc></url><url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/detail/:id</loc></url><url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/random</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://mel-chiu.github.io/Vue-animalWeb/#</loc></url>
+<url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/gallery</loc></url>
+<url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/detail/:id</loc></url>
+<url><loc>https://mel-chiu.github.io/Vue-animalWeb/#/random</loc></url></urlset>

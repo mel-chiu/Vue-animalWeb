@@ -1,14 +1,20 @@
 <template>
   <div id="detailPage">
-   <img :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
+    <img
+      v-if="profile.urls"
+      :src="profile.urls.regular"
+      :alt="profile.alt_description"
+      id="profileImg"
+    />
     <div v-if="profile" id="content">
       <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
       <p>{{profile.likes}} Likes</p>
-      <p>{{profile.user.name}}</p>
+      <p v-if="profile.user">{{profile.user.name}}</p>
     </div>
     <div id="related-items">
       <div class="related-item">
         <router-link
+          v-if="profile.related_collections"
           :to="{name: 'DetailPage', params: {id: profile.related_collections.results[0].cover_photo.id}}"
           tag="img"
           :src="profile.related_collections.results[0].cover_photo.urls.thumb"
@@ -16,6 +22,7 @@
       </div>
       <div class="related-item">
         <router-link
+          v-if="profile.related_collections"
           :to="{name: 'DetailPage', params: {id: profile.related_collections.results[1].cover_photo.id}}"
           tag="img"
           :src="profile.related_collections.results[1].cover_photo.urls.thumb"
@@ -23,6 +30,7 @@
       </div>
       <div class="related-item">
         <router-link
+          v-if="profile.related_collections"
           :to="{name: 'DetailPage', params: {id: profile.related_collections.results[2].cover_photo.id}}"
           tag="img"
           :src="profile.related_collections.results[2].cover_photo.urls.thumb"
@@ -35,47 +43,46 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
+
 export default Vue.extend({
-  name:"DetailPage",
+  name: "DetailPage",
   props: ["id"],
   data() {
     return {
-      profile: [] as Array<object>
+      profile: [{}] as Array<object>
     };
   },
-  
+
   methods: {
     findProfile(id?: string) {
-        this.profile = [];
-        
+      this.profile = [];
+
       axios
-        .get('https://api.unsplash.com/photos/'+ this.id, {
+        .get("https://api.unsplash.com/photos/" + this.id, {
           headers: {
-            Authorization:
-              `Client-ID ${process.env.VUE_APP_MYVUE}`
+            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
           }
         })
         .then(res => {
           this.profile = res.data;
-          
         })
         .catch(() => {
           this.profile = [];
-          
         });
     }
-    
   },
-   watch: {
+  watch: {
     $route(to: string, from: string) {
       this.findProfile();
     }
   },
-  mounted() {
+
+  beforeMount() {
     this.findProfile();
   }
 });
 </script>
+
 <style scoped>
 #detailPage {
   color: #eee;
@@ -95,11 +102,32 @@ export default Vue.extend({
   width: auto;
   height: 300px;
   overflow: hidden;
-  margin: 0 40px;
+  margin: 30px 40px;
 }
 #content {
   position: relative;
   text-align: right;
   right: 100px;
+}
+@media (max-width: 450px) {
+  #content {
+    position: relative;
+    text-align: right;
+    left: 20px;
+    width: 300px;
+    height: 300px;
+  }
+  .related-item {
+  width: auto;
+  height: 300px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+ .related-item>router-link{
+   padding: 30px;
+ }
+  img {
+    width: 85px;
+  }
 }
 </style>

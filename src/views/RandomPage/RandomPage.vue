@@ -4,11 +4,11 @@
       <Spinner/>
     </div>
     <div v-else-if="!loading">
-    <img :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
+    <img v-if="profile.urls" :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
     <div v-if="profile" id="content">
       <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
       <p>{{profile.likes}} Likes</p>
-      <p>{{profile.user.name}}</p>
+      <p v-if="profile.user">{{profile.user.name}}</p>
     </div>
     <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
     </div>
@@ -63,7 +63,7 @@ export default Vue.extend({
       this.findProfile();
     }
   },
-  beforeMount(){
+  created(){
     this.loading=true;
   },
 
@@ -81,19 +81,6 @@ export default Vue.extend({
   width: 100%;
   height: auto;
 }
-#related-items {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-}
-.related-item {
-  width: auto;
-  height: 300px;
-  overflow: hidden;
-  margin: 0 40px;
-}
 #content {
   position: relative;
   text-align: right;
@@ -102,5 +89,20 @@ export default Vue.extend({
 #next {
   position: relative;
   left: 45%;
+}
+@media(max-width: 450px){
+#content {
+  position: relative;
+  text-align: right;
+  left: 20px;
+  width: 300px;
+  height: 300px;
+}
+#next {
+  position: relative;
+  left: 42%;
+  width: 20%;
+  height: 20%;
+}
 }
 </style>

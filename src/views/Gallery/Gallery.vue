@@ -104,4 +104,12 @@ export default Vue.extend({
   background-color: rgb(134, 122, 95);
   color: #eee;
 }
+@media(max-width: 500px){
+  #search>input{
+    width: 120px;
+  }
+  #Gallery-welcome>h1{
+    font-size:50px;
+}
+}
 </style>

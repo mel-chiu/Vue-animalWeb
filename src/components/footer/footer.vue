@@ -1,6 +1,6 @@
 <template>
     <footer id="footer">
-        <h1>sitemap</h1>
+        <my-sitemap/>
         <div>
             <ul id="copyright">
                 <li>{{copyright}}</li>         
@@ -11,8 +11,14 @@
 </template>
 <script lang="ts">
 import {Vue, Component, Prop} from "vue-property-decorator";
+import SiteMap from './siteMap/siteMap.vue';
 
-@Component
+@Component({
+    components:{
+        'my-sitemap' : SiteMap
+    }
+})
+
 export default class Footer extends Vue{
  @Prop(String) readonly copyright!: string
 }
@@ -20,15 +26,20 @@ export default class Footer extends Vue{
 <style>
 #footer{
     width: 100%;
-    height: 200px;
+    height: auto;
     position: relative;
     bottom: 0;
     background: rgb(3, 2, 8);
     color: #eee;
     z-index: 99;
-}
+    display: flex;
+    justify-content:space-between ;
+    align-items: flex-end;
+    }
 #copyright>li{
     list-style-type: none;
+    position: relative;
+    right: 10px;
 }
 </style>
 

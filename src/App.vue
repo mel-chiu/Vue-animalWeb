@@ -6,7 +6,7 @@
     <router-view/>
     
     
-      <app-footer copyright="Designed by Melinda Chiu 2020"/>
+      <app-footer copyright="Designed by Melinda Chiu | 2020"/>
     
     
   </div>
