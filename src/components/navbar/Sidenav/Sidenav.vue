@@ -42,10 +42,10 @@ export default class Sidenav extends Vue {
 }
 #options > li {
   margin: 50px 0px;
+  list-style-type: none;
 }
 .option {
   padding: 0 20px;
-  list-style-type: none;
   text-decoration: none;
   color: rgb(146, 114, 114);
 }

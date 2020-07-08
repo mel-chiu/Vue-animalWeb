@@ -30,7 +30,7 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      profile: [] as unknown,
+      profile: [] as object,
       loading: false as boolean
     };
   },
@@ -38,7 +38,7 @@ export default Vue.extend({
     Spinner
   },
   methods: {
-    findProfile() {
+    findProfile(): void{
       this.profile = [];
       axios
         .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
@@ -50,7 +50,7 @@ export default Vue.extend({
           this.profile = res.data;
         });
     },
-    nextToggle() {
+    nextToggle(): void{
       this.profile = [];
       axios
         .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
@@ -64,7 +64,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    $route(to, from) {
+    $route(to: string, from: string) {
       this.findProfile();
     }
   },
@@ -89,19 +89,28 @@ export default Vue.extend({
 #content {
   position: relative;
   text-align: right;
-  right: 70px;
+  right: 5px;
+  width: 85%;
 }
 #next {
   position: relative;
   left: 45%;
 }
+@media (max-width: 800px) {
+  #content {
+    position: relative;
+    width: 85%;
+    height: 100%;
+    right: 10px;
+  }
+}
 @media (max-width: 450px) {
   #content {
     position: relative;
     text-align: right;
-    left: 20px;
-    width: 300px;
-    height: 300px;
+    left: 18px;
+    width: 85%;
+    height: 100%;
   }
   #next {
     position: relative;

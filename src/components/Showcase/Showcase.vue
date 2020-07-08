@@ -27,7 +27,7 @@ export default Vue.extend({
 
   data() {
     return {
-      images: [] as Array<string | number>
+      images: [] as object
     };
   },
 
@@ -49,7 +49,7 @@ export default Vue.extend({
           this.images = [];
         });
     },
-    showPhoto() {
+    showPhoto(): void{
       this.images = [];
       axios
         .get(
