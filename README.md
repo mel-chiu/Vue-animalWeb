@@ -1,4 +1,4 @@
-# melinda-chiu
+# Vue-animalWeb
 
-Animal website made with Vue.js.
+An animal photo website made with Vue.js & TypeScript
 
