@@ -43,7 +43,6 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-
 export default Vue.extend({
   name: "DetailPage",
   props: ["id"],
@@ -52,11 +51,9 @@ export default Vue.extend({
       profile: [{}] as Array<object>
     };
   },
-
   methods: {
     findProfile(id?: string) {
       this.profile = [];
-
       axios
         .get("https://api.unsplash.com/photos/" + this.id, {
           headers: {
@@ -76,7 +73,6 @@ export default Vue.extend({
       this.findProfile();
     }
   },
-
   beforeMount() {
     this.findProfile();
   }
@@ -109,23 +105,31 @@ export default Vue.extend({
   text-align: right;
   right: 100px;
 }
+@media (max-width: 800px) {
+  #content {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    right: 10px;
+  }
+}
 @media (max-width: 450px) {
   #content {
     position: relative;
     text-align: right;
-    left: 20px;
+    left: 18px;
     width: 300px;
     height: 300px;
   }
   .related-item {
-  width: auto;
-  height: 300px;
-  overflow: hidden;
-  margin: 0 20px;
-}
- .related-item>router-link{
-   padding: 30px;
- }
+    width: auto;
+    height: 300px;
+    overflow: hidden;
+    margin: 0 20px;
+  }
+  .related-item > router-link {
+    padding: 30px;
+  }
   img {
     width: 85px;
   }

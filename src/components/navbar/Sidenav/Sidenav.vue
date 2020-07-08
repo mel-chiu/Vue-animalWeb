@@ -14,12 +14,12 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Emit } from "vue-property-decorator";
 export default class Sidenav extends Vue {
+  @Prop() menushow!: boolean;
   private option1 = "Home";
   private option2 = "Discovery";
   private option3 = "Randomizer";
-  private menushow = true;
 }
 </script>
 <style scoped>
@@ -37,6 +37,19 @@ export default class Sidenav extends Vue {
 }
 #options {
   text-align: center;
-  font-size: 60px;
+  font-size: 150%;
+  margin-top: 100px;
+}
+#options > li {
+  margin: 50px 0px;
+}
+.option {
+  padding: 0 20px;
+  list-style-type: none;
+  text-decoration: none;
+  color: rgb(146, 114, 114);
+}
+#options > li :hover {
+  color: rgb(212, 171, 171);
 }
 </style>

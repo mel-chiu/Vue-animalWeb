@@ -1,19 +1,17 @@
 <template>
-<div id="loading-icon">
+  <div id="loading-icon">
     <div class="Spinner">Loading...</div>
-    </div>
+  </div>
 </template>
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-    
-})
+import Vue from "vue";
+export default Vue.extend({});
 </script>
 <style scoped>
-#loading-icon{
-    position: relative;
-    align-items: center;
-    height: 450px;
+#loading-icon {
+  position: relative;
+  align-items: center;
+  height: 450px;
 }
 .Spinner,
 .Spinner:before,
@@ -41,7 +39,7 @@ export default Vue.extend({
 .Spinner:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 .Spinner:before {
   left: -1.5em;

@@ -7,7 +7,12 @@
       </div>
 
       <div id="search">
-        <input type="text" v-model="topic" placeholder="For example: rabbit" @keyup.enter="showPhoto(topic)" />
+        <input
+          type="text"
+          v-model="topic"
+          placeholder="For example: rabbit"
+          @keyup.enter="showPhoto(topic)"
+        />
         <button @click="showPhoto(topic)" id="enter-btn">enter</button>
       </div>
     </div>
@@ -15,7 +20,7 @@
       <stack :column-min-width="300" :gutter-width="20" :gutter-height="20" monitor-images-loaded>
         <stack-item v-for="(image, id) in images" :key="id">
           <router-link :to="{name: 'DetailPage', params: {id: image.id}}">
-            <img :src="image.urls.small" :alt="image.alt_description" id="grid-img"/>
+            <img :src="image.urls.small" :alt="image.alt_description" id="grid-img" />
           </router-link>
         </stack-item>
       </stack>
@@ -82,34 +87,35 @@ export default Vue.extend({
   color: #eee;
 }
 #Gallery-content {
-    position: relative;
-    padding: 60px;
-    margin: 0px 20px;
+  position: relative;
+  padding: 60px;
+  margin: 0px 20px;
 }
-#Gallery-welcome>h1{
-    font-size:60px;
+#Gallery-welcome > h1 {
+  font-size: 60px;
 }
-#Gallery-welcome>p{
-    font-size:20px;
+#Gallery-welcome > p {
+  font-size: 20px;
 }
-#search>input{
- width: 30%;
+#search > input {
+  width: 30%;
+  border-radius: 3px;
 }
 #grid-img {
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
-#enter-btn{
+#enter-btn {
   background-color: rgb(134, 122, 95);
   color: #eee;
 }
-@media(max-width: 500px){
-  #search>input{
+@media (max-width: 500px) {
+  #search > input {
     width: 120px;
   }
-  #Gallery-welcome>h1{
-    font-size:50px;
-}
+  #Gallery-welcome > h1 {
+    font-size: 50px;
+  }
 }
 </style>

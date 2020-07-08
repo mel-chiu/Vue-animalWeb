@@ -35,6 +35,7 @@ export default class Navbar extends Vue {
   public updateScroll(): void {
     this.scrollPosition = window.scrollY;
   }
+
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
   }
@@ -65,14 +66,7 @@ export default class Navbar extends Vue {
   flex-direction: row;
   margin: 10px 30px 0 0;
 }
-#menubars > li {
-  padding: 0 10px;
-  margin: 0 5px;
-  list-style-type: none;
-}
-#menubars > li > router-link {
-  text-decoration: none;
-}
+
 .changeNavColor {
   background-color: #eee;
 }
@@ -98,11 +92,6 @@ export default class Navbar extends Vue {
 }
 #bar3.change3 {
   transform: rotate(45deg) translate(-8px, -7px);
-}
-.option {
-  color: rgb(146, 114, 114);
-  text-decoration: none;
-  font-size: 18px;
 }
 
 .open {

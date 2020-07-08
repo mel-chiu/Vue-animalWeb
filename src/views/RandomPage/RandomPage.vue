@@ -1,16 +1,21 @@
 <template>
   <div id="RandomPage">
     <div v-if="loading">
-      <Spinner/>
+      <Spinner />
     </div>
     <div v-else-if="!loading">
-    <img v-if="profile.urls" :src="profile.urls.regular" :alt="profile.alt_description" id="profileImg" />
-    <div v-if="profile" id="content">
-      <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
-      <p>{{profile.likes}} Likes</p>
-      <p v-if="profile.user">{{profile.user.name}}</p>
-    </div>
-    <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
+      <img
+        v-if="profile.urls"
+        :src="profile.urls.regular"
+        :alt="profile.alt_description"
+        id="profileImg"
+      />
+      <div v-if="profile" id="content">
+        <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
+        <p>{{profile.likes}} Likes</p>
+        <p v-if="profile.user">{{profile.user.name}}</p>
+      </div>
+      <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
     </div>
   </div>
 </template>
@@ -26,10 +31,10 @@ export default Vue.extend({
   data() {
     return {
       profile: [] as unknown,
-      loading:false as boolean
+      loading: false as boolean
     };
   },
-  components:{
+  components: {
     Spinner
   },
   methods: {
@@ -63,12 +68,12 @@ export default Vue.extend({
       this.findProfile();
     }
   },
-  created(){
-    this.loading=true;
+  created() {
+    this.loading = true;
   },
 
   mounted() {
-    this.loading=false;
+    this.loading = false;
     this.findProfile();
   }
 });
@@ -90,19 +95,19 @@ export default Vue.extend({
   position: relative;
   left: 45%;
 }
-@media(max-width: 450px){
-#content {
-  position: relative;
-  text-align: right;
-  left: 20px;
-  width: 300px;
-  height: 300px;
-}
-#next {
-  position: relative;
-  left: 42%;
-  width: 20%;
-  height: 20%;
-}
+@media (max-width: 450px) {
+  #content {
+    position: relative;
+    text-align: right;
+    left: 20px;
+    width: 300px;
+    height: 300px;
+  }
+  #next {
+    position: relative;
+    left: 42%;
+    width: 20%;
+    height: 20%;
+  }
 }
 </style>

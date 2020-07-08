@@ -27,7 +27,7 @@ export default Vue.extend({
 
   data() {
     return {
-      images: [] as Array<string | number>,
+      images: [] as Array<string | number>
     };
   },
 
@@ -36,8 +36,8 @@ export default Vue.extend({
     StackItem
   },
   methods: {
-    findPhoto(topic?: string){
-       this.images = [];
+    findPhoto(topic?: string) {
+      this.images = [];
       axios
         .get(
           `https://api.unsplash.com/search/photos?query=${topic}&per_page=10&page=1&order_by=oldest&client_id=${process.env.VUE_APP_MYVUE}`
@@ -49,7 +49,7 @@ export default Vue.extend({
           this.images = [];
         });
     },
-    showPhoto(){
+    showPhoto() {
       this.images = [];
       axios
         .get(
@@ -63,7 +63,7 @@ export default Vue.extend({
         });
     }
   },
-  beforeMount(){
+  beforeMount() {
     this.showPhoto();
   }
 });
@@ -88,7 +88,7 @@ img {
   height: auto;
   border-radius: 15px;
 }
-.btn{
+.btn {
   background-color: rgb(134, 122, 95);
   border: 1px solid rgb(53, 43, 11);
   width: 100px;
@@ -99,7 +99,7 @@ img {
   margin: 0 3px 20px 3px;
   cursor: pointer;
 }
-.btn:hover{
+.btn:hover {
   background-color: rgb(36, 32, 25);
 }
 </style>
