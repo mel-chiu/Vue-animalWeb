@@ -27,7 +27,7 @@ export default Vue.extend({
 
   data() {
     return {
-      images: [] as object
+      images: [] as Array<object>
     };
   },
 

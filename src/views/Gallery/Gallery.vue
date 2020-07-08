@@ -36,7 +36,7 @@ export default Vue.extend({
   name: "Gallery",
   data() {
     return {
-      images: [] as object,
+      images: [] as Array<object>,
       topic: "" as string,
       welcomeGallery: "Do you want to discover other interesting topics? Try to enter your favourite topic below." as string
     };

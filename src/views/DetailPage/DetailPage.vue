@@ -49,7 +49,7 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      profile: [] as object
+      profile: [] as Array<object>
     };
   },
   methods: {
