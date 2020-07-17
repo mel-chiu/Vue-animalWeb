@@ -1,0 +1,1 @@
+export const FIND_PHOTO = 'FIND_PHOTO';

@@ -1,25 +1,42 @@
 <template>
   <div id="Sidenav">
     <ul id="options">
-      <li>
-        <router-link to="/" class="option">{{option1}}</router-link>
-      </li>
-      <li>
-        <router-link to="/gallery" class="option">{{option2}}</router-link>
-      </li>
-      <li>
-        <router-link to="/random" class="option">{{option3}}</router-link>
+      <li
+        class="option"
+        v-for="navOption in navOptions"
+        :key="navOption.key"
+        @click="setMenushow"
+      >
+        <router-link :to="navOption.href" tag="li" exact-active-class="active">{{navOption.name}}</router-link>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from "vue-property-decorator";
+import {mapMutations} from 'vuex';
+
 export default class Sidenav extends Vue {
-  @Prop() menushow!: boolean;
-  private option1 = "Home";
-  private option2 = "Discovery";
-  private option3 = "Randomizer";
+  private navOptions = [
+    {
+      name: "Home",
+      key: 0,
+      href: "/"
+    },
+    {
+      name: "Discovery",
+      key: 1,
+      href: "/gallery"
+    },
+    {
+      name: "Randomizer",
+      key: 2,
+      href: "/random"
+    }
+  ]
+  get setMenushow(){
+   return this.$store.getters.menushow;
+  }
 }
 </script>
 <style scoped>
@@ -48,6 +65,7 @@ export default class Sidenav extends Vue {
   padding: 0 20px;
   text-decoration: none;
   color: rgb(146, 114, 114);
+  cursor: default;
 }
 #options > li :hover {
   color: rgb(212, 171, 171);

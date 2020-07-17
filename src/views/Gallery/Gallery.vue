@@ -18,7 +18,7 @@
     </div>
     <div id="Gallery-grid">
       <stack :column-min-width="300" :gutter-width="20" :gutter-height="20" monitor-images-loaded>
-        <stack-item v-for="(image, id) in images" :key="id">
+        <stack-item v-for="(image, id) in galleryItems" :key="id">
           <router-link :to="{name: 'DetailPage', params: {id: image.id}}">
             <img :src="image.urls.small" :alt="image.alt_description" id="grid-img" />
           </router-link>
@@ -36,7 +36,7 @@ export default Vue.extend({
   name: "Gallery",
   data() {
     return {
-      images: [] as Array<object>,
+      galleryItems: [] as Array<object>,
       topic: "" as string,
       welcomeGallery: "Do you want to discover other interesting topics? Try to enter your favourite topic below." as string
     };
@@ -47,29 +47,29 @@ export default Vue.extend({
   },
   methods: {
     showPhoto() {
-      this.images = [];
+      this.galleryItems = [];
       axios
         .get(
           `https://api.unsplash.com/search/photos?query=${this.topic}&per_page=30&client_id=${process.env.VUE_APP_MYVUE}`
         )
         .then(response => {
-          this.images = response.data.results;
+          this.galleryItems = response.data.results;
         })
         .catch(() => {
-          this.images = [];
+          this.galleryItems = [];
         });
     },
     showExample() {
-      this.images = [];
+      this.galleryItems = [];
       axios
         .get(
           `https://api.unsplash.com/search/photos?query=cat-and-dog&per_page=30&client_id=${process.env.VUE_APP_MYVUE}`
         )
         .then(response => {
-          this.images = response.data.results;
+          this.galleryItems = response.data.results;
         })
         .catch(() => {
-          this.images = [];
+          this.galleryItems = [];
         });
     }
   },

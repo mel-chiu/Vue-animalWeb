@@ -36,6 +36,7 @@
 import Vue from "vue";
 import axios from "axios";
 import { Stack, StackItem } from "vue-stack-grid";
+import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: "Showcase",
@@ -51,7 +52,12 @@ export default Vue.extend({
     Stack,
     StackItem
   },
+  computed:{
+   ...mapGetters([
+      'getImages']),
+  },
   methods: {
+   
     findPhoto(topic?: string) {
       this.images = [];
       axios
@@ -102,7 +108,11 @@ export default Vue.extend({
 img {
   width: 100%;
   height: auto;
-  border-radius: 15px;
+  border-radius: 10px;
+}
+img:hover{
+  width: 90%;
+  box-shadow: 0px 8px 23px -2px rgba(238, 238, 238, 0.8);
 }
 #Showcase > button {
   background-color: rgb(134, 122, 95);

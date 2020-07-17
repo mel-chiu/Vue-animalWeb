@@ -3,10 +3,10 @@
     <router-link to="/home" class="logo-btn">
       <img src="../../../public/catIcon.png" alt="icon" class="logo-btn" />
     </router-link>
-    <my-sidenav :class="{open: menushow, closed:!menushow}" />
+    <my-sidenav :class="{open: menushow, closed: !menushow}" />
     <div>
       <ul id="menubars">
-        <div id="menuToggle" @click="menushow = !menushow">
+        <div id="menuToggle" @click="setMenushow">
           <div class="bar" id="bar1" :class="{change1: menushow}"></div>
           <div class="bar" id="bar2" :class="{change2: menushow}"></div>
           <div class="bar" id="bar3" :class="{change3: menushow}"></div>
@@ -29,13 +29,18 @@ export default class Navbar extends Vue {
   private option1 = "Home";
   private option2 = "Discovery";
   private option3 = "Randomizer";
-  private menushow = false;
+  //private menushow = false;
   private scrollPosition = 0;
 
   public updateScroll(): void {
     this.scrollPosition = window.scrollY;
   }
-
+  get menushow(){
+   return this.$store.state.menushow;
+  }
+  get setMenushow(){
+   return this.$store.getters.menushow;
+  }
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
   }

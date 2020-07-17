@@ -5,15 +5,15 @@
     </div>
     <div v-else-if="!loading">
       <img
-        v-if="profile.urls"
-        :src="profile.urls.regular"
-        :alt="profile.alt_description"
+        v-if="randomPhoto.urls"
+        :src="randomPhoto.urls.regular"
+        :alt="randomPhoto.alt_description"
         id="profileImg"
       />
-      <div v-if="profile" id="content">
-        <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
-        <p>{{profile.likes}} Likes</p>
-        <p v-if="profile.user">{{profile.user.name}}</p>
+      <div v-if="randomPhoto" id="content">
+        <h1 v-if="randomPhoto.alt_description">{{randomPhoto.alt_description}}</h1>
+        <p>{{randomPhoto.likes}} Likes</p>
+        <p v-if="randomPhoto.user">{{randomPhoto.user.name}}</p>
       </div>
       <hr/>
       <div id="randomBtn" @click="nextToggle" >
@@ -34,7 +34,7 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      profile: [] as Array<object>,
+      randomPhoto: [] as Array<object>,
       loading: false as boolean
     };
   },
@@ -43,7 +43,7 @@ export default Vue.extend({
   },
   methods: {
     findProfile(): void{
-      this.profile = [];
+      this.randomPhoto = [];
       axios
         .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
           headers: {
@@ -51,11 +51,11 @@ export default Vue.extend({
           }
         })
         .then(res => {
-          this.profile = res.data;
+          this.randomPhoto = res.data;
         });
     },
     nextToggle(): void{
-      this.profile = [];
+      this.randomPhoto = [];
       axios
         .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
           headers: {
@@ -63,7 +63,7 @@ export default Vue.extend({
           }
         })
         .then(res => {
-          this.profile = res.data;
+          this.randomPhoto = res.data;
         });
     }
   },

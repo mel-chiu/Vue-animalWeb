@@ -1,6 +1,10 @@
-import { Mutation, MutationTree } from 'vuex';
+import {MutationTree } from 'vuex';
+import {FIND_PHOTO} from './mutation-types';
+import {State} from './index';
 
-const mutations: MutationTree<any> = {
-    
+
+const mutations: MutationTree<State> = {
+
 }
-export default mutations; 
+
+export default mutations;
