@@ -15,7 +15,11 @@
         <p>{{profile.likes}} Likes</p>
         <p v-if="profile.user">{{profile.user.name}}</p>
       </div>
-      <img src="../../assets/next.png" alt="next" @click="nextToggle" id="next" />
+      <hr/>
+      <div id="randomBtn" @click="nextToggle" >
+      <img src="../../assets/next.png" alt="next"  id="next"/>
+      <p>Next photo</p>
+      </div>
     </div>
   </div>
 </template>
@@ -91,10 +95,29 @@ export default Vue.extend({
   text-align: right;
   right: 5px;
   width: 85%;
+  margin-bottom: 40px;
 }
 #next {
   position: relative;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+#randomBtn{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 2px;
+  margin: 10px;
   left: 45%;
+  font-size: 20px;
+  align-items: center;
+  width:200px;
+}
+hr{
+  width: 70%;
+  opacity: 60%;
 }
 @media (max-width: 800px) {
   #content {
@@ -102,6 +125,14 @@ export default Vue.extend({
     width: 85%;
     height: 100%;
     right: 10px;
+  }
+   #randomBtn {
+    left: 35%;
+    font-size: 17px;
+  }
+  #next {
+    width: 17px;
+    height: 17px;
   }
 }
 @media (max-width: 450px) {
@@ -112,11 +143,13 @@ export default Vue.extend({
     width: 85%;
     height: 100%;
   }
+  #randomBtn {
+    left: 35%;
+    font-size: 15px;
+  }
   #next {
-    position: relative;
-    left: 42%;
-    width: 20%;
-    height: 20%;
+    width: 15px;
+    height: 15px;
   }
 }
 </style>

@@ -76,9 +76,6 @@ export default Vue.extend({
 
   beforeMount() {
     this.showExample();
-  },
-  mounted() {
-    this.showExample();
   }
 });
 </script>
@@ -99,7 +96,15 @@ export default Vue.extend({
 }
 #search > input {
   width: 30%;
-  border-radius: 3px;
+  height: 20px;
+  border-radius: 8px 0 0 8px;
+  background-color: #eee;
+  border: 1.5px solid rgb(134, 122, 95);
+  padding: 5px;
+  
+}
+#search > input:focus{
+    outline: none !important;
 }
 #grid-img {
   width: 100%;
@@ -107,8 +112,18 @@ export default Vue.extend({
   border-radius: 10px;
 }
 #enter-btn {
+  box-sizing: border-box;
   background-color: rgb(134, 122, 95);
   color: #eee;
+  border-radius: 0 8px 8px 0;
+  padding: 8px;
+  box-shadow: burlywood;
+  border: 0.2px solid rgb(134, 122, 95);
+}
+#enter-btn:focus {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
 }
 @media (max-width: 500px) {
   #search > input {

@@ -2,9 +2,24 @@
   <div id="Showcase">
     <h1>Especially for you</h1>
     <p>Which one is your favourite ?</p>
-    <button type="submit" class="btn" @click.prevent="findPhoto('cat')">Cat</button>
-    <button type="submit" class="btn" @click.prevent="findPhoto('dog')">Dog</button>
-    <button type="submit" class="btn" @click.prevent="findPhoto('cat-and-dog')">Both</button>
+    <button
+      type="submit"
+      :class="{active: activeBtn === 'btnCat'}"
+      @click.prevent="findPhoto('cat')"
+      @click="activeBtn = 'btnCat'"
+    >Cat</button>
+    <button
+      type="submit"
+      :class="{active: activeBtn === 'btnDog'}"
+      @click.prevent="findPhoto('dog')"
+      @click="activeBtn = 'btnDog'"
+    >Dog</button>
+    <button
+      type="submit"
+      :class="{active: activeBtn === 'btnBoth'}"
+      @click.prevent="findPhoto('cat-and-dog')"
+      @click="activeBtn = 'btnBoth'"
+    >Both</button>
 
     <div class="pic-row">
       <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
@@ -27,7 +42,8 @@ export default Vue.extend({
 
   data() {
     return {
-      images: [] as Array<object>
+      images: [] as Array<object>,
+      activeBtn: "" as string
     };
   },
 
@@ -49,7 +65,7 @@ export default Vue.extend({
           this.images = [];
         });
     },
-    showPhoto(): void{
+    showPhoto(): void {
       this.images = [];
       axios
         .get(
@@ -88,7 +104,7 @@ img {
   height: auto;
   border-radius: 15px;
 }
-.btn {
+#Showcase > button {
   background-color: rgb(134, 122, 95);
   border: 1px solid rgb(53, 43, 11);
   width: 100px;
@@ -98,8 +114,16 @@ img {
   padding: 4px;
   margin: 0 3px 20px 3px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.btn:hover {
+#Showcase > button:focus {
+  outline: none !important;
+  outline-offset: none !important;
+}
+#Showcase > button:hover {
   background-color: rgb(36, 32, 25);
+}
+.active {
+  background-color: rgb(36, 32, 25) !important;
 }
 </style>
