@@ -8,7 +8,7 @@
     />
     <div v-if="profile" id="content">
       <h1 v-if="profile.alt_description">{{profile.alt_description}}</h1>
-      <p>{{profile.likes}} Likes</p>
+      <p>{{profile.likes}} {{Likes}}</p>
       <p v-if="profile.user">{{profile.user.name}}</p>
     </div>
     <div id="related-items">
@@ -42,40 +42,33 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
 
 export default Vue.extend({
   name: "DetailPage",
   props: ["id"],
   data() {
     return {
-      profile: [] as Array<object>
+      Likes: "Likes"
+ 
     };
   },
+  computed:{
+    profile(){
+    return  this.$store.state.profile
+    }
+  },
   methods: {
-    findProfile(id?: string): void{
-      this.profile = [];
-      axios
-        .get("https://api.unsplash.com/photos/" + this.id, {
-          headers: {
-            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
-          }
-        })
-        .then(res => {
-          this.profile = res.data;
-        })
-        .catch(() => {
-          this.profile = [];
-        });
+     findProfile(id?: string){
+      this.$store.dispatch('findProfile', id)
     }
   },
   watch: {
     $route(to: string, from: string) {
-      this.findProfile();
+      this.findProfile(this.id);
     }
   },
   beforeMount() {
-    this.findProfile();
+    this.findProfile(this.id);
   }
 });
 </script>

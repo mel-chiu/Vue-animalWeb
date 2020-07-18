@@ -6,7 +6,7 @@
     <my-sidenav :class="{open: menushow, closed: !menushow}" />
     <div>
       <ul id="menubars">
-        <div id="menuToggle" @click="setMenushow">
+        <div id="menuToggle" @click="TOGGLE_MENUSHOW">
           <div class="bar" id="bar1" :class="{change1: menushow}"></div>
           <div class="bar" id="bar2" :class="{change2: menushow}"></div>
           <div class="bar" id="bar3" :class="{change3: menushow}"></div>
@@ -26,19 +26,18 @@ import Sidenav from "./Sidenav/Sidenav.vue";
   }
 })
 export default class Navbar extends Vue {
-  private option1 = "Home";
-  private option2 = "Discovery";
-  private option3 = "Randomizer";
-  //private menushow = false;
   private scrollPosition = 0;
 
   public updateScroll(): void {
     this.scrollPosition = window.scrollY;
   }
+  public TOGGLE_MENUSHOW(){
+    this.$store.commit('TOGGLE_MENUSHOW')
+  }
   get menushow(){
    return this.$store.state.menushow;
   }
-  get setMenushow(){
+  get gMenushow(){
    return this.$store.getters.menushow;
   }
   mounted() {
@@ -65,11 +64,13 @@ export default class Navbar extends Vue {
   margin: 3px;
   margin-left: 10px;
   z-index: 400;
+  -webkit-tap-highlight-color: transparent;
 }
 #menubars {
   display: flex;
   flex-direction: row;
   margin: 10px 30px 0 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .changeNavColor {

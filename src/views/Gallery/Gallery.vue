@@ -1,5 +1,5 @@
 <template>
-  <div id="Gallery">
+  <div id="Gallery" v-if="galleryItems">
     <div id="Gallery-content">
       <div id="Gallery-welcome">
         <h1>Discovery</h1>
@@ -11,16 +11,16 @@
           type="text"
           v-model="topic"
           placeholder="For example: rabbit"
-          @keyup.enter="showPhoto(topic)"
+          @keyup.enter="findGalleryItems(topic)"
         />
-        <button @click="showPhoto(topic)" id="enter-btn">enter</button>
+        <button @click="findGalleryItems(topic)" id="enter-btn">enter</button>
       </div>
     </div>
-    <div id="Gallery-grid">
+    <div id="Gallery-grid" >
       <stack :column-min-width="300" :gutter-width="20" :gutter-height="20" monitor-images-loaded>
-        <stack-item v-for="(image, id) in galleryItems" :key="id">
-          <router-link :to="{name: 'DetailPage', params: {id: image.id}}">
-            <img :src="image.urls.small" :alt="image.alt_description" id="grid-img" />
+        <stack-item v-for="(item, id) in galleryItems" :key="id">
+          <router-link :to="{name: 'DetailPage', params: {id: item.id}}">
+            <img :src="item.urls.small" :alt="item.alt_description" id="grid-img" />
           </router-link>
         </stack-item>
       </stack>
@@ -28,56 +28,28 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
 import { Stack, StackItem } from "vue-stack-grid";
+import {Component, Vue} from 'vue-property-decorator'
 
-export default Vue.extend({
-  name: "Gallery",
-  data() {
-    return {
-      galleryItems: [] as Array<object>,
-      topic: "" as string,
-      welcomeGallery: "Do you want to discover other interesting topics? Try to enter your favourite topic below." as string
-    };
-  },
+@Component({
   components: {
     Stack,
     StackItem
-  },
-  methods: {
-    showPhoto() {
-      this.galleryItems = [];
-      axios
-        .get(
-          `https://api.unsplash.com/search/photos?query=${this.topic}&per_page=30&client_id=${process.env.VUE_APP_MYVUE}`
-        )
-        .then(response => {
-          this.galleryItems = response.data.results;
-        })
-        .catch(() => {
-          this.galleryItems = [];
-        });
-    },
-    showExample() {
-      this.galleryItems = [];
-      axios
-        .get(
-          `https://api.unsplash.com/search/photos?query=cat-and-dog&per_page=30&client_id=${process.env.VUE_APP_MYVUE}`
-        )
-        .then(response => {
-          this.galleryItems = response.data.results;
-        })
-        .catch(() => {
-          this.galleryItems = [];
-        });
-    }
-  },
-
-  beforeMount() {
-    this.showExample();
   }
-});
+})
+export default class Gallery extends Vue{
+  private topic = ""
+  private welcomeGallery = "Do you want to discover other interesting topics? Try to enter your favourite topic below." 
+  get galleryItems(){
+      return this.$store.state.galleryItems;
+    }
+  public findGalleryItems(topic: string){
+      this.$store.dispatch('findGalleryItems', topic)
+    }
+  beforeMount(){
+    this.findGalleryItems('cat-and-dog');
+  }
+}
 </script>
 <style scoped>
 #Gallery {

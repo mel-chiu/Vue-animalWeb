@@ -5,16 +5,15 @@
         class="option"
         v-for="navOption in navOptions"
         :key="navOption.key"
-        @click="setMenushow"
+        @click="TOGGLE_MENUSHOW()"
       >
-        <router-link :to="navOption.href" tag="li" exact-active-class="active">{{navOption.name}}</router-link>
+        <router-link :to="navOption.href" tag="li" exact-active-class="active" >{{navOption.name}}</router-link>
       </li>
     </ul>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from "vue-property-decorator";
-import {mapMutations} from 'vuex';
 
 export default class Sidenav extends Vue {
   private navOptions = [
@@ -34,8 +33,12 @@ export default class Sidenav extends Vue {
       href: "/random"
     }
   ]
-  get setMenushow(){
+
+  get gMenushow(){
    return this.$store.getters.menushow;
+  }
+  async TOGGLE_MENUSHOW(){
+    this.$store.commit('TOGGLE_MENUSHOW')
   }
 }
 </script>

@@ -16,7 +16,7 @@
         <p v-if="randomPhoto.user">{{randomPhoto.user.name}}</p>
       </div>
       <hr/>
-      <div id="randomBtn" @click="nextToggle" >
+      <div id="randomBtn" @click="findRandomPhoto" >
       <img src="../../assets/next.png" alt="next"  id="next"/>
       <p>Next photo</p>
       </div>
@@ -26,7 +26,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
 import Spinner from "../../components/UI/Spinner/Spinner.vue";
 
 export default Vue.extend({
@@ -34,42 +33,25 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      randomPhoto: [] as Array<object>,
       loading: false as boolean
     };
   },
   components: {
     Spinner
   },
+  computed:{
+    randomPhoto(){
+      return this.$store.state.randomPhoto
+    }
+  },
   methods: {
-    findProfile(): void{
-      this.randomPhoto = [];
-      axios
-        .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
-          headers: {
-            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
-          }
-        })
-        .then(res => {
-          this.randomPhoto = res.data;
-        });
-    },
-    nextToggle(): void{
-      this.randomPhoto = [];
-      axios
-        .get("https://api.unsplash.com/photos/random/?query=cat-and-dog", {
-          headers: {
-            Authorization: `Client-ID ${process.env.VUE_APP_MYVUE}`
-          }
-        })
-        .then(res => {
-          this.randomPhoto = res.data;
-        });
+    findRandomPhoto(){
+      this.$store.dispatch('findRandomPhoto')
     }
   },
   watch: {
     $route(to: string, from: string) {
-      this.findProfile();
+      this.findRandomPhoto();
     }
   },
   created() {
@@ -78,7 +60,7 @@ export default Vue.extend({
 
   mounted() {
     this.loading = false;
-    this.findProfile();
+    this.findRandomPhoto();
   }
 });
 </script>
@@ -114,6 +96,7 @@ export default Vue.extend({
   font-size: 20px;
   align-items: center;
   width:200px;
+  -webkit-tap-highlight-color: transparent;
 }
 hr{
   width: 70%;

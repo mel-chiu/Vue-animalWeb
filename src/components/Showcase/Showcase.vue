@@ -33,62 +33,27 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
 import { Stack, StackItem } from "vue-stack-grid";
-import { mapActions, mapGetters } from 'vuex';
+import { Component, Vue } from "vue-property-decorator";
 
-export default Vue.extend({
-  name: "Showcase",
-
-  data() {
-    return {
-      images: [] as Array<object>,
-      activeBtn: "" as string
-    };
-  },
-
+@Component({
   components: {
     Stack,
     StackItem
-  },
-  computed:{
-   ...mapGetters([
-      'getImages']),
-  },
-  methods: {
-   
-    findPhoto(topic?: string) {
-      this.images = [];
-      axios
-        .get(
-          `https://api.unsplash.com/search/photos?query=${topic}&per_page=10&page=1&order_by=oldest&client_id=${process.env.VUE_APP_MYVUE}`
-        )
-        .then(response => {
-          this.images = response.data.results;
-        })
-        .catch(() => {
-          this.images = [];
-        });
-    },
-    showPhoto(): void {
-      this.images = [];
-      axios
-        .get(
-          `https://api.unsplash.com/search/photos?query=cat&per_page=10&page=1&order_by=oldest&client_id=${process.env.VUE_APP_MYVUE}`
-        )
-        .then(response => {
-          this.images = response.data.results;
-        })
-        .catch(() => {
-          this.images = [];
-        });
-    }
-  },
-  beforeMount() {
-    this.showPhoto();
   }
-});
+})
+export default class Showcase extends Vue {
+  private activeBtn = "";
+  get images() {
+    return this.$store.state.images;
+  }
+  public findPhoto(topic?: string) {
+    this.$store.dispatch("findPhoto", topic);
+  }
+  beforeMount() {
+    this.findPhoto("pet");
+  }
+}
 </script>
 <style scoped>
 #Showcase {
@@ -110,7 +75,7 @@ img {
   height: auto;
   border-radius: 10px;
 }
-img:hover{
+img:hover {
   width: 90%;
   box-shadow: 0px 8px 23px -2px rgba(238, 238, 238, 0.8);
 }

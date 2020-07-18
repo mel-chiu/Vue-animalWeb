@@ -5,7 +5,7 @@ import mutations from './mutations';
 
 Vue.use(Vuex);
 
-const state ={
+const state = {
     menushow: false as boolean,
     images: [] as Array<object>,
     profile: [] as Array<object>,
@@ -14,9 +14,9 @@ const state ={
 }
 export type State = typeof state;
 
-const getters ={
-    menushow: (state: State) => (): boolean=> {
-        return state.menushow = !state.menushow;
+const getters = {
+    menushow: (state: State) => (): boolean => {
+        return state.menushow;
     },
     getImages: (state: State) => () => {
         return state.images;
@@ -29,7 +29,7 @@ const getters ={
     },
     getRandomPhoto: (state: State) => () => {
         return state.randomPhoto;
-    },
+    }
 }
 
 export default new Vuex.Store({
