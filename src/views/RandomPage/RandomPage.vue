@@ -50,7 +50,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    $route(to: string, from: string) {
+    $route(to: object, from: object) {
       this.findRandomPhoto();
     }
   },
