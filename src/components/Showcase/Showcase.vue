@@ -3,24 +3,28 @@
     <h1>Especially for you</h1>
     <p>Which one is your favourite ?</p>
     <button
+      v-for="optionBtn in optionBtns"
+      :key="optionBtn.key"
       type="submit"
-      :class="{active: activeBtn === 'btnCat'}"
-      @click.prevent="findPhoto('cat')"
-      @click="activeBtn = 'btnCat'"
-    >Cat</button>
-    <button
-      type="submit"
-      :class="{active: activeBtn === 'btnDog'}"
-      @click.prevent="findPhoto('dog')"
-      @click="activeBtn = 'btnDog'"
-    >Dog</button>
-    <button
-      type="submit"
-      :class="{active: activeBtn === 'btnBoth'}"
-      @click.prevent="findPhoto('cat-and-dog')"
-      @click="activeBtn = 'btnBoth'"
-    >Both</button>
+      :class="{active: activeBtn === optionBtn.name}"
+      @click.prevent="findPhoto(optionBtn.topic)"
+      @click="activeBtn = optionBtn.name"
+    >{{optionBtn.text}}</button>
 
+    <div id="sort-buttons">
+      <button
+        id="mostLikesBtn"
+        :class="{sorting: activeSortBtn === 'mostLikes'}"
+        @click.prevent="sortMostLikes"
+        @click="activeSortBtn = 'mostLikes'"
+      >Most Likes</button>
+      <button
+        id="fewestLikesBtn"
+        :class="{sorting: activeSortBtn === 'fewestLikes'}"
+        @click.prevent="sortFewestLikes"
+        @click="activeSortBtn = 'fewestLikes'"
+      >Fewest Likes</button>
+    </div>
     <div class="pic-row">
       <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
         <stack-item v-for="(image, id) in images" :key="id" style="transition: transform 300ms">
@@ -44,11 +48,38 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class Showcase extends Vue {
   private activeBtn = "";
+  private activeSortBtn = "";
+  private optionBtns = [
+    {
+      key: "cat",
+      name: "btnCat",
+      topic: "cat",
+      text: "Cat"
+    },
+    {
+      key: "dog",
+      name: "btnDog",
+      topic: "dog",
+      text: "Dog"
+    },
+    {
+      key: "both",
+      name: "btnBoth",
+      topic: "cat-and-dog",
+      text: "Both"
+    }
+  ];
   get images() {
     return this.$store.state.images;
   }
   public findPhoto(topic?: string) {
     this.$store.dispatch("findPhoto", topic);
+  }
+  public sortMostLikes() {
+    this.$store.commit("SORT_MOSTLIKES");
+  }
+  public sortFewestLikes() {
+    this.$store.commit("SORT_FEWESTLIKES");
   }
   beforeMount() {
     this.findPhoto("pet");
@@ -100,5 +131,35 @@ img:hover {
 }
 .active {
   background-color: rgb(36, 32, 25) !important;
+}
+#sort-buttons {
+  text-align: end;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+#sort-buttons > button {
+  background-color: rgba(238, 238, 238, 0.8);
+  -webkit-tap-highlight-color: transparent;
+  padding: 6px;
+  box-shadow: inset 3px 1px 24px -10px rgb(97, 88, 68);
+  color: #eee;
+  border: 1px solid rgb(36, 32, 25);
+  font-size: 11px;
+  cursor: pointer;
+  text-shadow: rgb(63, 52, 14) 2px 0 10px;
+}
+.sorting {
+  background-color: rgb(36, 32, 25) !important;
+  box-shadow: none !important;
+}
+#sort-buttons > button {
+  outline: none !important;
+  outline-offset: none !important;
+}
+#mostLikesBtn {
+  border-radius: 10px 0 0 10px;
+}
+#fewestLikesBtn {
+  border-radius: 0 10px 10px 0;
 }
 </style>
