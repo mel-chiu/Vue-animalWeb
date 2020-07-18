@@ -16,11 +16,14 @@
         <button @click="findGalleryItems(topic)" id="enter-btn">enter</button>
       </div>
     </div>
-    <div id="Gallery-grid" >
+    <div id="Gallery-grid">
       <stack :column-min-width="300" :gutter-width="20" :gutter-height="20" monitor-images-loaded>
         <stack-item v-for="(item, id) in galleryItems" :key="id">
-          <router-link :to="{name: 'DetailPage', params: {id: item.id}}">
+          <router-link :to="{name: 'DetailPage', params: {id: item.id}}" id="grid-img-link">
             <img :src="item.urls.small" :alt="item.alt_description" id="grid-img" />
+            <div class="cover">
+              <div class="gallery-grid-text">{{item.alt_description}}</div>
+            </div>
           </router-link>
         </stack-item>
       </stack>
@@ -29,7 +32,7 @@
 </template>
 <script lang="ts">
 import { Stack, StackItem } from "vue-stack-grid";
-import {Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   components: {
@@ -37,17 +40,18 @@ import {Component, Vue} from 'vue-property-decorator'
     StackItem
   }
 })
-export default class Gallery extends Vue{
-  private topic = ""
-  private welcomeGallery = "Do you want to discover other interesting topics? Try to enter your favourite topic below." 
-  get galleryItems(){
-      return this.$store.state.galleryItems;
-    }
-  public findGalleryItems(topic: string){
-      this.$store.dispatch('findGalleryItems', topic)
-    }
-  beforeMount(){
-    this.findGalleryItems('cat-and-dog');
+export default class Gallery extends Vue {
+  private topic = "";
+  private welcomeGallery =
+    "Do you want to discover other interesting topics? Try to enter your favourite topic below.";
+  get galleryItems() {
+    return this.$store.state.galleryItems;
+  }
+  public findGalleryItems(topic: string) {
+    this.$store.dispatch("findGalleryItems", topic);
+  }
+  beforeMount() {
+    this.findGalleryItems("cat-and-dog");
   }
 }
 </script>
@@ -73,15 +77,15 @@ export default class Gallery extends Vue{
   background-color: #eee;
   border: 1.5px solid rgb(134, 122, 95);
   padding: 5px;
-  
 }
-#search > input:focus{
-    outline: none !important;
+#search > input:focus {
+  outline: none !important;
 }
 #grid-img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  box-shadow: -2px 15px 41px -10px rgba(0, 0, 0, 0.75);
 }
 #enter-btn {
   box-sizing: border-box;
@@ -95,7 +99,28 @@ export default class Gallery extends Vue{
 #enter-btn:focus {
   outline: none !important;
   -webkit-box-shadow: none !important;
-  box-shadow: none  !important;
+  box-shadow: none !important;
+}
+.cover {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: 0.4s ease-in;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#grid-img-link:hover #grid-img {
+  opacity: 0.4;
+}
+#grid-img-link:hover .cover {
+  opacity: 1;
+}
+.gallery-grid-text {
+  color: #eee;
+  font-size: 15px;
+  padding: 18px;
+  z-index: 20;
 }
 @media (max-width: 500px) {
   #search > input {

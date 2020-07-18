@@ -101,6 +101,21 @@ export default Vue.extend({
 }
 .related-item:hover {
   background-color: rgb(202, 199, 199);
+  animation: shake 0.8s forwards;
+}
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 .related-item > a {
   text-decoration: none;

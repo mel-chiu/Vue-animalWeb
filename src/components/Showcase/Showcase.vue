@@ -12,6 +12,7 @@
     >{{optionBtn.text}}</button>
 
     <div id="sort-buttons">
+      
       <button
         id="mostLikesBtn"
         :class="{sorting: activeSortBtn === 'mostLikes'}"
@@ -24,6 +25,7 @@
         @click.prevent="sortFewestLikes"
         @click="activeSortBtn = 'fewestLikes'"
       >Fewest Likes</button>
+      
     </div>
     <div class="pic-row">
       <stack :column-min-width="300" :gutter-width="15" :gutter-height="15" monitor-images-loaded>
@@ -151,6 +153,7 @@ img:hover {
 .sorting {
   background-color: rgb(36, 32, 25) !important;
   box-shadow: none !important;
+  transition: 0.5s linear !important;
 }
 #sort-buttons > button {
   outline: none !important;

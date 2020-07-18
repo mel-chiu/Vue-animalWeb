@@ -31,14 +31,14 @@ export default class Navbar extends Vue {
   public updateScroll(): void {
     this.scrollPosition = window.scrollY;
   }
-  public TOGGLE_MENUSHOW(){
-    this.$store.commit('TOGGLE_MENUSHOW')
+  public TOGGLE_MENUSHOW() {
+    this.$store.commit("TOGGLE_MENUSHOW");
   }
-  get menushow(){
-   return this.$store.state.menushow;
+  get menushow() {
+    return this.$store.state.menushow;
   }
-  get gMenushow(){
-   return this.$store.getters.menushow;
+  get gMenushow() {
+    return this.$store.getters.menushow;
   }
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
