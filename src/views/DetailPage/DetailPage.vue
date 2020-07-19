@@ -23,7 +23,9 @@
           :to="{name: 'DetailPage', params: {id:profile.related_collections.results[relatedItem.key].cover_photo.id}}"
           class="realted-item-link"
         >
-          <img :src="profile.related_collections.results[relatedItem.key].cover_photo.urls.thumb" id="related-img"/>
+          <div>
+          <img :src="profile.related_collections.results[relatedItem.key].cover_photo.urls.thumb" class="related-img"/>
+          </div>
           <p
             class="related-item-text"
           >{{profile.related_collections.results[relatedItem.key].title}}</p>
@@ -69,7 +71,7 @@ export default class DetailPage extends Vue {
     this.$store.dispatch("findProfile", id);
   }
   @Watch("$route", { immediate: true, deep: true })
-  onRouteChange(to: any, from: any) {
+  onRouteChange(to: object, from: object) {
     this.findProfile(this.id);
   }
   beforeMount() {
@@ -138,12 +140,15 @@ export default class DetailPage extends Vue {
   right: 5px;
   width: 85%;
 }
-#related-img {
-  opacity: 85%;
-  z-index: 2;
+.related-img {
+  opacity: 0.85;
+  z-index: 20;
 }
-#related-img:hover {
-  opacity: 100%;
+.related-item:hover .related-img{
+  opacity: 1;
+}
+.related-img:hover {
+  opacity: 1;
 }
 @media (max-width: 800px) {
   #content {
@@ -160,7 +165,7 @@ export default class DetailPage extends Vue {
     word-wrap: inherit;
     font-size: 15px;
   }
-  img {
+  .related-img {
     width: 100px;
   }
 }
@@ -181,7 +186,7 @@ export default class DetailPage extends Vue {
     font-size: 10px;
   }
 
-  img {
+  .related-img {
     width: 85px;
   }
 }

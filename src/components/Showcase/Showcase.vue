@@ -108,6 +108,8 @@ img {
   height: auto;
   border-radius: 10px;
   box-shadow: 0px 15px 30px -10px rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+  z-index: 50;
 }
 img:hover {
   width: 90%;

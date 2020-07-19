@@ -15,7 +15,9 @@
         <p>{{randomPhoto.likes}} Likes</p>
         <p v-if="randomPhoto.user">{{randomPhoto.user.name}}</p>
       </div>
+      <div>
       <hr />
+      </div>
       <div id="randomBtn" @click="findRandomPhoto">
         <img src="../../assets/next.png" alt="next" id="next" />
         <p>{{next}}</p>
@@ -46,7 +48,7 @@ export default class RandomPage extends Vue {
     this.$store.dispatch("findRandomPhoto");
   }
   @Watch("$route", { immediate: true, deep: true })
-  onRouteChange(to: any, from: any) {
+  onRouteChange(to: object, from: object) {
     this.findRandomPhoto();
   }
   mounted() {
@@ -90,7 +92,8 @@ export default class RandomPage extends Vue {
 }
 hr {
   width: 70%;
-  opacity: 60%;
+  opacity: 0.6;
+  z-index: 65;
 }
 @media (max-width: 800px) {
   #content {
