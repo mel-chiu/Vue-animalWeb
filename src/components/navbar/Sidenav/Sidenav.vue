@@ -7,7 +7,7 @@
         :key="navOption.key"
         @click="TOGGLE_MENUSHOW()"
       >
-        <router-link :to="navOption.href" tag="li" exact-active-class="active" >{{navOption.name}}</router-link>
+        <router-link :to="navOption.href" tag="li" exact-active-class="active">{{navOption.name}}</router-link>
       </li>
     </ul>
   </div>
@@ -32,13 +32,13 @@ export default class Sidenav extends Vue {
       key: 2,
       href: "/random"
     }
-  ]
+  ];
 
-  get gMenushow(){
-   return this.$store.getters.menushow;
+  get gMenushow() {
+    return this.$store.getters.menushow;
   }
-  async TOGGLE_MENUSHOW(){
-    this.$store.commit('TOGGLE_MENUSHOW')
+  async TOGGLE_MENUSHOW() {
+    this.$store.commit("TOGGLE_MENUSHOW");
   }
 }
 </script>
@@ -71,6 +71,7 @@ export default class Sidenav extends Vue {
   cursor: default;
 }
 #options > li :hover {
-  color: rgb(212, 171, 171);
+  color: rgb(224, 181, 181);
+  transition: 0.3s ease-in;
 }
 </style>

@@ -107,10 +107,12 @@ img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  box-shadow: 0px 15px 30px -10px rgba(0, 0, 0, 0.5);
 }
 img:hover {
   width: 90%;
-  box-shadow: 0px 8px 23px -2px rgba(238, 238, 238, 0.8);
+  box-shadow: 0px 2px 30px -2px rgba(238, 238, 238, 0.8);
+  transition: 0.5s ease;
 }
 #Showcase > button {
   background-color: rgb(134, 122, 95);

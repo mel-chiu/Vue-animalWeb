@@ -85,7 +85,7 @@ export default class Gallery extends Vue {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: -2px 15px 41px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: -2px 15px 41px -10px rgba(0, 0, 0, 0.7);
 }
 #enter-btn {
   box-sizing: border-box;

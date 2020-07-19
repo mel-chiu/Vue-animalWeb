@@ -89,6 +89,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: flex-start;
   margin-bottom: 20px;
+  -webkit-tap-highlight-color: transparent;
 }
 .related-item {
   width: auto;
@@ -98,6 +99,7 @@ export default Vue.extend({
   padding: 8px;
   border-radius: 2px;
   box-shadow: 2px 13px 31px 12px rgba(36, 21, 3, 0.75);
+  -webkit-tap-highlight-color: transparent;
 }
 .related-item:hover {
   background-color: rgb(202, 199, 199);

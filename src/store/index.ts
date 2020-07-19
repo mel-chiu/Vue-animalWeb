@@ -11,12 +11,16 @@ const state = {
     profile: [] as Array<object>,
     galleryItems: [] as Array<object>,
     randomPhoto: [] as Array<object>,
+    loading: false as boolean
 }
 export type State = typeof state;
 
 const getters = {
     menushow: (state: State) => (): boolean => {
         return state.menushow;
+    },
+    loading: (state: State) => (): boolean => {
+        return state.loading;
     },
     getImages: (state: State) => () => {
         return state.images;

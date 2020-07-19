@@ -1,5 +1,5 @@
 import { MutationTree } from 'vuex';
-import { FIND_PHOTO, FIND_PROFILE, FIND_GALLERYITEMS, FIND_RANDOMPHOTO, TOGGLE_MENUSHOW, SORT_MOSTLIKES, SORT_FEWESTLIKES } from './mutation-types';
+import { FIND_PHOTO, FIND_PROFILE, FIND_GALLERYITEMS, FIND_RANDOMPHOTO, TOGGLE_MENUSHOW, SORT_MOSTLIKES, SORT_FEWESTLIKES, CLOSE_LOADING } from './mutation-types';
 import { State } from './index';
 
 
@@ -30,6 +30,9 @@ const mutations: MutationTree<State> = {
             const fewestLikes = state.images;
             fewestLikes.sort((a, b) => (a as any).likes > (b as any).likes ? 1 : -1)
         }
+    },
+    [CLOSE_LOADING](state: State){
+        state.loading = true
     }
 }
 

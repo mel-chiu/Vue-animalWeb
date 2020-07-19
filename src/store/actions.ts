@@ -48,6 +48,7 @@ const actions: ActionTree<any, any> = {
             })
             .then((res) => {
                 commit("FIND_RANDOMPHOTO", res.data)
+                commit("CLOSE_LOADING")
             })
             .catch(err => {
                 console.log(err)

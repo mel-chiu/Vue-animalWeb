@@ -1,10 +1,10 @@
 <template>
   <div id="RandomPage">
-    <div v-if="loading">
+    <div v-show="!loading">
       <Spinner />
     </div>
-    <div v-else-if="!loading">
-      <img
+    <div v-show="loading">
+      <img 
         v-if="randomPhoto.urls"
         :src="randomPhoto.urls.regular"
         :alt="randomPhoto.alt_description"
@@ -18,7 +18,7 @@
       <hr/>
       <div id="randomBtn" @click="findRandomPhoto" >
       <img src="../../assets/next.png" alt="next"  id="next"/>
-      <p>Next photo</p>
+      <p>{{next}}</p>
       </div>
     </div>
   </div>
@@ -33,7 +33,7 @@ export default Vue.extend({
   props: ["id"],
   data() {
     return {
-      loading: false as boolean
+      next: "Next Photo"
     };
   },
   components: {
@@ -42,6 +42,9 @@ export default Vue.extend({
   computed:{
     randomPhoto(){
       return this.$store.state.randomPhoto
+    },
+    loading(){
+      return this.$store.state.loading
     }
   },
   methods: {
@@ -54,12 +57,7 @@ export default Vue.extend({
       this.findRandomPhoto();
     }
   },
-  created() {
-    this.loading = true;
-  },
-
   mounted() {
-    this.loading = false;
     this.findRandomPhoto();
   }
 });
