@@ -16,7 +16,10 @@
         <button @click="findGalleryItems(topic)" id="enter-btn">enter</button>
       </div>
     </div>
-    <div id="Gallery-grid">
+    <div v-show="!loading">
+      <Spinner/>
+    </div>
+    <div id="Gallery-grid" v-show="loading">
       <stack :column-min-width="300" :gutter-width="20" :gutter-height="20" monitor-images-loaded>
         <stack-item v-for="(item, id) in galleryItems" :key="id">
           <router-link :to="{name: 'DetailPage', params: {id: item.id}}" id="grid-img-link">
@@ -33,11 +36,13 @@
 <script lang="ts">
 import { Stack, StackItem } from "vue-stack-grid";
 import { Component, Vue } from "vue-property-decorator";
+import Spinner from '../../components/UI/Spinner/Spinner.vue'
 
 @Component({
   components: {
     Stack,
-    StackItem
+    StackItem,
+    Spinner
   }
 })
 export default class Gallery extends Vue {
@@ -46,6 +51,9 @@ export default class Gallery extends Vue {
     "Do you want to discover other interesting topics? Try to enter your favourite topic below.";
   get galleryItems() {
     return this.$store.state.galleryItems;
+  }
+  get loading(){
+      return this.$store.state.loading
   }
   public findGalleryItems(topic: string) {
     this.$store.dispatch("findGalleryItems", topic);
@@ -77,6 +85,7 @@ export default class Gallery extends Vue {
   background-color: #eee;
   border: 1.5px solid rgb(134, 122, 95);
   padding: 5px;
+  color:rgb(99, 83, 49);
 }
 #search > input:focus {
   outline: none !important;
@@ -122,12 +131,26 @@ export default class Gallery extends Vue {
   padding: 18px;
   z-index: 20;
 }
-@media (max-width: 500px) {
+@media(max-width: 500px){
   #search > input {
-    width: 120px;
+     width: 120px;
   }
   #Gallery-welcome > h1 {
     font-size: 50px;
+  }
+  #Gallery-welcome > p {
+    font-size: 18px;
+  }
+}
+@media (max-width: 350px) {
+  #search > input {
+     width: 90px;
+  }
+  #Gallery-welcome > h1 {
+    font-size: 40px;
+  }
+  #Gallery-welcome > p {
+    font-size: 15px;
   }
 }
 </style>

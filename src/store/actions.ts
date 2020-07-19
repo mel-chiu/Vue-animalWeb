@@ -22,6 +22,7 @@ const actions: ActionTree<any, any> = {
             })
             .then((res) => {
                 commit("FIND_PROFILE", res.data)
+                commit("CLOSE_LOADING")
             })
             .catch(err => {
                 console.log(err)
@@ -34,6 +35,7 @@ const actions: ActionTree<any, any> = {
             )
             .then((res) => {
                 commit("FIND_GALLERYITEMS", res.data.results)
+                commit("CLOSE_LOADING")
             })
             .catch(err => {
                 console.log(err)

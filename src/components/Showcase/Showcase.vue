@@ -167,4 +167,12 @@ img:hover {
 #fewestLikesBtn {
   border-radius: 0 10px 10px 0;
 }
+@media (max-width: 300px){
+  #Showcase > h1 {
+    font-size:95%;
+}
+#Showcase > p {
+    font-size:75%;
+}
+}
 </style>

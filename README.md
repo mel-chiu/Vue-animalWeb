@@ -1,4 +1,6 @@
 # Vue-animalWeb
 
-An animal photo website made with Vue.js & TypeScript
+An animal photo website 
+Use tools : Vue.js, TypeScript, Vuex
+
 

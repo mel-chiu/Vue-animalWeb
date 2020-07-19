@@ -1,5 +1,9 @@
 <template>
   <div id="detailPage">
+    <div v-show="!loading">
+      <Spinner />
+    </div>
+    <div v-show="loading">
     <img
       v-if="profile.urls"
       :src="profile.urls.regular"
@@ -19,59 +23,59 @@
           :to="{name: 'DetailPage', params: {id:profile.related_collections.results[relatedItem.key].cover_photo.id}}"
           class="realted-item-link"
         >
-          <img :src="profile.related_collections.results[relatedItem.key].cover_photo.urls.thumb" />
+          <img :src="profile.related_collections.results[relatedItem.key].cover_photo.urls.thumb" id="related-img"/>
           <p
             class="related-item-text"
           >{{profile.related_collections.results[relatedItem.key].title}}</p>
         </router-link>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue, Watch, Prop } from "vue-property-decorator";
+import Spinner from '../../components/UI/Spinner/Spinner.vue';
 
-export default Vue.extend({
-  name: "DetailPage",
-  props: ["id"],
-  data() {
-    return {
-      relatedItems: [
-        {
-          key: 0 as number
-        },
-        {
-          key: 1 as number
-        },
-        {
-          key: 2 as number
-        }
-      ]
-    };
-  },
-  computed: {
-    profile() {
-      return this.$store.state.profile;
+@Component({
+  components:{
+    Spinner
+  }
+})
+export default class DetailPage extends Vue {
+  @Prop() id!: string;
+  private relatedItems = [
+    {
+      key: 0 as number
     },
-    getProfile() {
-      return this.$store.getters.getProfile;
+    {
+      key: 1 as number
+    },
+    {
+      key: 2 as number
     }
-  },
-  methods: {
-    findProfile(id?: string) {
-      this.$store.dispatch("findProfile", id);
-    }
-  },
-  watch: {
-    $route(to: object, from: object) {
-      this.findProfile(this.id);
-    }
-  },
+  ];
+  get profile() {
+    return this.$store.state.profile;
+  }
+  get getProfile() {
+    return this.$store.getters.getProfile;
+  }
+  get loading() {
+    return this.$store.state.loading;
+  }
+  public findProfile(id?: string) {
+    this.$store.dispatch("findProfile", id);
+  }
+  @Watch("$route", { immediate: true, deep: true })
+  onRouteChange(to: any, from: any) {
+    this.findProfile(this.id);
+  }
   beforeMount() {
     this.findProfile(this.id);
   }
-});
+}
 </script>
 
 <style scoped>
@@ -134,11 +138,11 @@ export default Vue.extend({
   right: 5px;
   width: 85%;
 }
-img {
+#related-img {
   opacity: 85%;
   z-index: 2;
 }
-img:hover {
+#related-img:hover {
   opacity: 100%;
 }
 @media (max-width: 800px) {

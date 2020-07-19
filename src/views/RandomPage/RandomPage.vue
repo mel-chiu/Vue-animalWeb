@@ -4,7 +4,7 @@
       <Spinner />
     </div>
     <div v-show="loading">
-      <img 
+      <img
         v-if="randomPhoto.urls"
         :src="randomPhoto.urls.regular"
         :alt="randomPhoto.alt_description"
@@ -15,52 +15,44 @@
         <p>{{randomPhoto.likes}} Likes</p>
         <p v-if="randomPhoto.user">{{randomPhoto.user.name}}</p>
       </div>
-      <hr/>
-      <div id="randomBtn" @click="findRandomPhoto" >
-      <img src="../../assets/next.png" alt="next"  id="next"/>
-      <p>{{next}}</p>
+      <hr />
+      <div id="randomBtn" @click="findRandomPhoto">
+        <img src="../../assets/next.png" alt="next" id="next" />
+        <p>{{next}}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import Spinner from "../../components/UI/Spinner/Spinner.vue";
 
-export default Vue.extend({
-  name: "RandomPage",
-  props: ["id"],
-  data() {
-    return {
-      next: "Next Photo"
-    };
-  },
+@Component({
   components: {
     Spinner
-  },
-  computed:{
-    randomPhoto(){
-      return this.$store.state.randomPhoto
-    },
-    loading(){
-      return this.$store.state.loading
-    }
-  },
-  methods: {
-    findRandomPhoto(){
-      this.$store.dispatch('findRandomPhoto')
-    }
-  },
-  watch: {
-    $route(to: object, from: object) {
-      this.findRandomPhoto();
-    }
-  },
+  }
+})
+export default class RandomPage extends Vue {
+  @Prop() id!: string;
+  private next = "Next Photo";
+  get randomPhoto() {
+    return this.$store.state.randomPhoto;
+  }
+  get loading() {
+    return this.$store.state.loading;
+  }
+  public findRandomPhoto() {
+    this.$store.dispatch("findRandomPhoto");
+  }
+  @Watch("$route", { immediate: true, deep: true })
+  onRouteChange(to: any, from: any) {
+    this.findRandomPhoto();
+  }
   mounted() {
     this.findRandomPhoto();
   }
-});
+}
 </script>
 <style scoped>
 #RandomPage {
@@ -83,7 +75,7 @@ export default Vue.extend({
   height: 30px;
   margin-right: 5px;
 }
-#randomBtn{
+#randomBtn {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -93,10 +85,10 @@ export default Vue.extend({
   left: 45%;
   font-size: 20px;
   align-items: center;
-  width:200px;
+  width: 200px;
   -webkit-tap-highlight-color: transparent;
 }
-hr{
+hr {
   width: 70%;
   opacity: 60%;
 }
@@ -107,7 +99,7 @@ hr{
     height: 100%;
     right: 10px;
   }
-   #randomBtn {
+  #randomBtn {
     left: 35%;
     font-size: 17px;
   }

@@ -85,7 +85,7 @@ export default class Home extends Vue {
 @media (max-width: 376px) {
   #landing {
     background-position: -340px 20px;
-    height: 85vh;
+    max-height: 85vh;
   }
   #landingMessage {
     font-size: 2.3em;
