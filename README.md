@@ -16,7 +16,7 @@ A responsive website to test my Vue.js and TypeScipt skills.
 ## Features
 
 1. Overlay menu
-2. 3 related polarid photos 
+2. 3 related polaroid photos 
 3. Discover different topics
 
 ## How to use?
