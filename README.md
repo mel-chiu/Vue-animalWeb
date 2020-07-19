@@ -3,7 +3,7 @@
 An animal photo website. 
 Welcome to visit the demo website : [Vue-animalWeb](https://mel-chiu.github.io/Vue-animalWeb/#/)
 
-![Vue-animalWeb-preview](https://github.com/mel-chiu/Vue-animalWeb/blob/master/Vue-animalWeb.jpg?raw=true)
+![Vue-animalWeb-preview](https://github.com/mel-chiu/Vue-animalWeb/blob/master/src/assets/Vue-animalWeb.jpg?raw=true)
 
 ## Tools
 
